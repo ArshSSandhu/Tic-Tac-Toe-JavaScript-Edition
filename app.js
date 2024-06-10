@@ -3,6 +3,10 @@
 let boxes = document.querySelectorAll(".box");
 let resetBtn = document.querySelector("#reset-btn");
 
+let newGameBtn = document.querySelector("#new-btn");
+let msgContainer = document.querySelector(".msg-container");
+let msg = document.querySelector("#msg");
+
 /**who goes first */
 
 /**play A and B */
@@ -40,19 +44,36 @@ let winnningPatterns = [
         }
         box.disabled=true;
 
-        const checkWinner = () => {
-            for (let pattern of winnningPatterns){
-                console.log(pattern[0], pattern[1],pattern[2]);
-                console.log(
-                    boxes[pattern[0]].innerText,
-                     boxes[pattern[1]].innerText, 
-                     boxes[pattern[2]].innerText);
+        checkWinner();
 
-                     let positionOfValue1 = boxes[pattern[0]].innerText;
-                     let positionOfValue2 = boxes[pattern[1]].innerText;
-                     let positionOfValue3 = boxes[pattern[2]].innerText;
-
-            }
-        }
     })
  })
+
+const showWinner = (winner) => {
+    msg.innerText = `Congratulations, Winner is ${winner}`;
+    msgContainer.classList.remove("hide");
+}
+
+
+ const checkWinner = () => {
+    for (let pattern of winnningPatterns){
+    
+             let positionOfValue1 = boxes[pattern[0]].innerText;
+             let positionOfValue2 = boxes[pattern[1]].innerText;
+             let positionOfValue3 = boxes[pattern[2]].innerText;
+
+             if(positionOfValue1!= "" && positionOfValue2!= "" && positionOfValue3!= ""){
+
+               if( positionOfValue1 === positionOfValue2 && positionOfValue2 === positionOfValue3){
+
+                console.log("winner!" , positionOfValue1)
+
+                /**create new function to show winner */
+                showWinner(positionOfValue1);
+
+               }
+
+             }
+
+    }
+}
