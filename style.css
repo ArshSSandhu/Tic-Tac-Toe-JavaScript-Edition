@@ -9,6 +9,15 @@ good practice when using a lot of custom controls
 
 #title{
     font-size: 80px;
+    color: white;
+}
+
+.myGame{
+    height: 1500px;
+    background-image: url("assets_game/window.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
 
 body{
@@ -67,7 +76,7 @@ body{
 }
 
 #msg{
-    color: black;
+    color: white;
     font-size: 50px;
 
 }
