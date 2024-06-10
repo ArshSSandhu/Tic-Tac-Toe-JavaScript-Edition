@@ -25,6 +25,34 @@ let winnningPatterns = [
 
  boxes.forEach((box) => {
     box.addEventListener("click", () =>{
-        console.log("clicked")
+        console.log("clicked");
+
+        /*Add O or X depending on Turn*/ 
+        if(turnA){
+            box.innerText = "O";
+            turnA = false;
+            
+        }
+        else{
+            /**Player X */
+            box.innerText= "X";
+            turnA= true;
+        }
+        box.disabled=true;
+
+        const checkWinner = () => {
+            for (let pattern of winnningPatterns){
+                console.log(pattern[0], pattern[1],pattern[2]);
+                console.log(
+                    boxes[pattern[0]].innerText,
+                     boxes[pattern[1]].innerText, 
+                     boxes[pattern[2]].innerText);
+
+                     let positionOfValue1 = boxes[pattern[0]].innerText;
+                     let positionOfValue2 = boxes[pattern[1]].innerText;
+                     let positionOfValue3 = boxes[pattern[2]].innerText;
+
+            }
+        }
     })
  })
