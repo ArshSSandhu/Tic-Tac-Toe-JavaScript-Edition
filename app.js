@@ -25,6 +25,14 @@ let winnningPatterns = [
     [2,4,6],
  ];
 
+
+const resetGame = () => {
+    turnA = true;
+    enableBoxes();
+    msgContainer.classList.add("hide");
+}
+
+
  /**event - clicking */
 
  boxes.forEach((box) => {
@@ -49,13 +57,37 @@ let winnningPatterns = [
     })
  })
 
-const showWinner = (winner) => {
-    msg.innerText = `Congratulations, Winner is ${winner}`;
-    msgContainer.classList.remove("hide");
+ const enableBoxes = () => {
+    for(let box of boxes){
+        box.disabled = false;
+        box.innerText = "";
+    }
 }
 
+const disableBoxes = () => {
+    for(let box of boxes){
+        box.disabled = true;
+    }
+}
+
+const showWinner = (winner) => {
+    msg.innerText = `Congratulations! Winner is ${winner}`;
+    msgContainer.classList.remove("hide");
+
+    disableBoxes();
+}
+
+const showTie = () => {
+    msg.innerText = "Oh no, It's a TIE ! You Both Lose!";
+    msgContainer.classList.remove("hide");
+    disableBoxes();
+}
+
+let isTie = true; 
 
  const checkWinner = () => {
+    isTie = true;
+
     for (let pattern of winnningPatterns){
     
              let positionOfValue1 = boxes[pattern[0]].innerText;
@@ -65,10 +97,6 @@ const showWinner = (winner) => {
              if(positionOfValue1!= "" && positionOfValue2!= "" && positionOfValue3!= ""){
 
                if( positionOfValue1 === positionOfValue2 && positionOfValue2 === positionOfValue3){
-
-                console.log("winner!" , positionOfValue1)
-
-                /**create new function to show winner */
                 showWinner(positionOfValue1);
 
                }
@@ -76,4 +104,23 @@ const showWinner = (winner) => {
              }
 
     }
-}
+
+
+  // Check for tie if no winner found and all boxes are filled
+  if (isTie) {
+    let allFilled = true;
+    for (let box of boxes) {
+      if (box.innerText === "") {
+        allFilled = false;
+        break;
+      }
+    }
+
+    if (allFilled) {
+      showTie();
+    }
+  }
+} 
+
+newGameBtn.addEventListener("click", resetGame)
+resetBtn.addEventListener("click", resetGame)

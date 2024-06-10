@@ -7,6 +7,10 @@ good practice when using a lot of custom controls
     padding: 0;
 } 
 
+#title{
+    font-size: 80px;
+}
+
 body{
     background-color: wheat ;
     text-align: center;
@@ -64,12 +68,17 @@ body{
 
 #msg{
     color: black;
-    font-size: 5vmin;
+    font-size: 50px;
 
 }
 
 .msg-container{
-    height: 30vmin;
+    height: 110vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .hide{
