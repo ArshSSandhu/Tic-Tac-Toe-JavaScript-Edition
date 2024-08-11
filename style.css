@@ -5,7 +5,7 @@
 }
 
 #title {
-    font-size: 80px;
+    font-size: 60px;
     color: white;
 }
 
@@ -29,7 +29,6 @@ body {
 }
 
 .card {
-    background-color: white;
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
@@ -49,7 +48,7 @@ body {
     border: 2px solid black;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.8);
     font-size: 2rem;
-    color: red;
+    color: rgb(239, 4, 161);
     background-color: whitesmoke;
     display: flex;
     justify-content: center;
