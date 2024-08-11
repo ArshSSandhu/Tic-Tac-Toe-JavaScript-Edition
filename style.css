@@ -1,87 +1,91 @@
-
-/*
-good practice when using a lot of custom controls
-*/
-*{
+/* Good practice when using a lot of custom controls */
+* {
     margin: 0;
     padding: 0;
-} 
+}
 
-#title{
+#title {
     font-size: 80px;
     color: white;
 }
 
-.myGame{
+.myGame {
     height: 1500px;
-    background-image: url("assets_game/window.jpg");
+    background-image: url("assets_game/111.webp");
     background-size: cover;
     background-repeat: no-repeat;
-
 }
 
-body{
-    background-color: wheat ;
+body {
+    background-color: wheat;
     text-align: center;
 }
 
-.container{
+.container {
     height: 70vh;
     display: flex;
-
     justify-content: center;
     align-items: center;
 }
 
-
-.game{
-    height: 60vmin;
-    width: 60vmin;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2vmin;
-}
-
-.box{
-    height: 18vmin;
-    width: 18vmin;
+.card {
+    background-color: white;
+    padding: 2rem;
     border-radius: 1rem;
-    border-color: black;
-    border-width: 1rem;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.box {
+    height: 100px;
+    width: 100px;
+    border-radius: 1rem;
+    border: 2px solid black;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.8);
-    font-size: 12vmin;
+    font-size: 2rem;
     color: red;
     background-color: whitesmoke;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-#reset-btn{
+.box:hover {
+    transform: scale(1.1);
+    background-color: lightgray;
+}
+
+#reset-btn,
+#new-btn {
     padding: 1rem;
     font-size: 1.25rem;
     background-color: black;
     color: white;
     border-radius: 1rem;
     border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-#new-btn{
-    padding: 1rem;
-    font-size: 1.25rem;
-    background-color: black;
-    color: white;
-    border-radius: 1rem;
-    border: none;
+#reset-btn:hover,
+#new-btn:hover {
+    background-color: darkgray;
+    transform: scale(1.1);
 }
 
-#msg{
+#msg {
     color: white;
     font-size: 50px;
-
 }
 
-.msg-container{
+.msg-container {
     height: 110vmin;
     display: flex;
     justify-content: center;
@@ -90,9 +94,6 @@ body{
     gap: 2rem;
 }
 
-.hide{
+.hide {
     display: none;
 }
-
-
-

@@ -1,73 +1,62 @@
-/*access elements*/
-
+// Access elements
 let boxes = document.querySelectorAll(".box");
 let resetBtn = document.querySelector("#reset-btn");
-
 let newGameBtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
 
-/**who goes first */
-
-/**play A and B */
+// Who goes first
 let turnA = true;
 
-/*Using 2 D array to create winning conditions*/
-
-let winnningPatterns = [
-    [0,1,2],
-    [3,4,5],
-    [5,6,7],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6],
- ];
-
+// Using 2D array to create winning conditions
+let winningPatterns = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8], // Fixed pattern 3 from [5,6,7] to [6,7,8]
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+];
 
 const resetGame = () => {
     turnA = true;
     enableBoxes();
     msgContainer.classList.add("hide");
+    msg.innerText = ""; // Clear the message text on reset
 }
 
-
- /**event - clicking */
-
- boxes.forEach((box) => {
-    box.addEventListener("click", () =>{
+/** Event - clicking */
+boxes.forEach((box) => {
+    box.addEventListener("click", () => {
         console.log("clicked");
 
-        /*Add O or X depending on Turn*/ 
-        if(turnA){
+        /* Add O or X depending on Turn */ 
+        if (turnA) {
             box.innerText = "O";
             turnA = false;
-            
+        } else {
+            box.innerText = "X";
+            turnA = true;
         }
-        else{
-            /**Player X */
-            box.innerText= "X";
-            turnA= true;
-        }
-        box.disabled=true;
+        box.disabled = true;
 
         checkWinner();
-
     })
- })
+})
 
- const enableBoxes = () => {
-    for(let box of boxes){
+const enableBoxes = () => {
+    boxes.forEach((box) => {
         box.disabled = false;
         box.innerText = "";
-    }
+    });
 }
 
 const disableBoxes = () => {
-    for(let box of boxes){
+    boxes.forEach((box) => {
         box.disabled = true;
-    }
+    });
 }
 
 const showWinner = (winner) => {
@@ -78,49 +67,44 @@ const showWinner = (winner) => {
 }
 
 const showTie = () => {
-    msg.innerText = "Oh no, It's a TIE ! You Both Lose!";
+    msg.innerText = "Oh no, It's a TIE! You Both Lose!";
     msgContainer.classList.remove("hide");
     disableBoxes();
 }
 
-let isTie = true; 
+const checkWinner = () => {
+    let isWinnerFound = false;
 
- const checkWinner = () => {
-    isTie = true;
+    for (let pattern of winningPatterns) {
+        let positionOfValue1 = boxes[pattern[0]].innerText;
+        let positionOfValue2 = boxes[pattern[1]].innerText;
+        let positionOfValue3 = boxes[pattern[2]].innerText;
 
-    for (let pattern of winnningPatterns){
-    
-             let positionOfValue1 = boxes[pattern[0]].innerText;
-             let positionOfValue2 = boxes[pattern[1]].innerText;
-             let positionOfValue3 = boxes[pattern[2]].innerText;
-
-             if(positionOfValue1!= "" && positionOfValue2!= "" && positionOfValue3!= ""){
-
-               if( positionOfValue1 === positionOfValue2 && positionOfValue2 === positionOfValue3){
+        if (positionOfValue1 !== "" && positionOfValue2 !== "" && positionOfValue3 !== "") {
+            if (positionOfValue1 === positionOfValue2 && positionOfValue2 === positionOfValue3) {
                 showWinner(positionOfValue1);
-
-               }
-
-             }
-
+                isWinnerFound = true;
+                break;
+            }
+        }
     }
 
+    // Check for tie if no winner found and all boxes are filled
+    if (!isWinnerFound) {
+        let allFilled = true;
+        for (let box of boxes) {
+            if (box.innerText === "") {
+                allFilled = false;
+                break;
+            }
+        }
 
-  // Check for tie if no winner found and all boxes are filled
-  if (isTie) {
-    let allFilled = true;
-    for (let box of boxes) {
-      if (box.innerText === "") {
-        allFilled = false;
-        break;
-      }
+        if (allFilled) {
+            showTie();
+        }
     }
+}
 
-    if (allFilled) {
-      showTie();
-    }
-  }
-} 
-
-newGameBtn.addEventListener("click", resetGame)
-resetBtn.addEventListener("click", resetGame)
+// Event listeners for reset buttons
+newGameBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
