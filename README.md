@@ -1,4 +1,5 @@
 # Tic-Tac-Toe-JavaScript-Edition
+![License](https://img.shields.io/badge/license-MIT-green)
 A timeless classic, brought to life in JavaScript. Play Tic Tac Toe and see if you can get three in a row!
 
 ## Features
